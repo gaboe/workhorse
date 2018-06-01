@@ -1,6 +1,6 @@
 {
   "name": "reason-scripts",
-  "sources": ["src"],
+  "sources": ["src", "src/Components/PageCreator"],
   "bs-dependencies": ["reason-react", "@glennsl/bs-jest"],
   "reason": {
     "react-jsx": 2
