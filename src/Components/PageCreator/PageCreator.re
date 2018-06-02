@@ -1,3 +1,17 @@
+module GetPage = [%graphql
+  {|
+  query getPage($name: String!){
+    page(name:$name){
+      name,
+      content
+    }  }
+|}
+];
+
+module GetPageQuery = ReasonApollo.CreateQuery(GetPage);
+
+let q = GetPage.make(~name="Test", ());
+
 let component = ReasonReact.statelessComponent("PageCreator");
 
 let make = _children => {
@@ -24,5 +38,16 @@ let make = _children => {
         />
       </div>
       <SaveButton />
+      <GetPageQuery variables=q##variables>
+        ...(
+             ({result}) =>
+               switch result {
+               | Loading => <div> (ReasonReact.string("Loading")) </div>
+               | Error(error) => <div> (ReasonReact.string("Error")) </div>
+               | Data(response) =>
+                 <div> (ReasonReact.string(response##page##content)) </div>
+               }
+           )
+      </GetPageQuery>
     </div>
 };
