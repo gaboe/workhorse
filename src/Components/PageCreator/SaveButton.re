@@ -1,10 +1,11 @@
 let component = ReasonReact.statelessComponent("SaveButton");
 
-let make = _children => {
+let make = (~onBtnClick, _children) => {
   ...component,
   render: _self =>
     <div>
       <button
+        onClick=(_ => onBtnClick()) 
         style=(
           ReactDOMRe.Style.make(
             ~backgroundColor="#db4d3f",
