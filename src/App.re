@@ -46,12 +46,18 @@ let make = (_children) => {
     )
 ],
   render: self =>
-    <div className="App">
     (
       switch self.state.route {
-      | PageCreator => <PageCreator />
+      | PageCreator => {
+        <div>
+          <div className="App">
+            <PageCreator /> 
+          </div>
+          <Footer />
+        </div>
+      }
       | Page => <Page name=(self.state.page) />
       }
     )
-    </div>,
+ ,
 };
