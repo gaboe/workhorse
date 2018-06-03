@@ -2,6 +2,7 @@
   "name": "workhorse",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://gaboe.github.io/workhorse",
   "dependencies": {
     "apollo-cache-inmemory": "^1.2.2",
     "apollo-client": "^2.3.2",
@@ -9,6 +10,7 @@
     "apollo-link-context": "^1.0.8",
     "apollo-link-error": "^1.0.9",
     "apollo-link-http": "^1.5.4",
+    "gh-pages": "^1.2.0",
     "graphql": "^0.12.3",
     "graphql-tag": "^2.8.0",
     "react": "^16.4.0",
@@ -25,7 +27,9 @@
     "eject": "react-scripts eject",
     "prepare": "npm link bs-platform",
     "update-schema":
-      "yarn send-introspection-query http://localhost:3000/graphql"
+      "yarn send-introspection-query http://localhost:3000/graphql",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "devDependencies": {
     "@glennsl/bs-jest": "^0.4.2",
