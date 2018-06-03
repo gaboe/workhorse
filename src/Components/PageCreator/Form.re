@@ -80,9 +80,7 @@ let make = _children => {
               ~variables=variables##variables,
               (),
             )
-            |> _ => 
-              ReasonReact.Router.push("/"++self.state.url)
-            ;
+            |> _ => ReasonReact.Router.push("/"++self.state.url);
           }) />
            
          )
