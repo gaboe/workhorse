@@ -9,5 +9,6 @@ ReactDOMRe.renderToElementWithId(
   </ReasonApollo.Provider>,
   "root",
 );
+ReasonReact.Router.push("");
 
 register_service_worker();

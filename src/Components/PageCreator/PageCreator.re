@@ -1,16 +1,4 @@
-module GetPage = [%graphql
-  {|
-  query getPage($name: String!){
-    page(name:$name){
-      name,
-      content
-    }  }
-|}
-];
-
-module GetPageQuery = ReasonApollo.CreateQuery(GetPage);
-
-let q = GetPage.make(~name="Teaast", ());
+[@bs.module] external logo : string = "./../../logo.svg";
 
 let component = ReasonReact.statelessComponent("PageCreator");
 
@@ -18,6 +6,13 @@ let make = _children => {
   ...component,
   render: _self =>
     <div>
+      <div className="App-header">
+        <img src=logo className="App-logo" alt="logo" />
+        <h2> (ReasonReact.string("WorkHorse")) </h2>
+      </div>
+      <p className="App-intro">
+        (ReasonReact.string("WorkHorse lets you create a custom page."))
+      </p>
       <div>
         <h2> (ReasonReact.string("Url")) </h2>
         <input style=(ReactDOMRe.Style.make(~fontSize="18px", ())) />
@@ -38,21 +33,6 @@ let make = _children => {
         />
       </div>
       <SaveButton />
-      <GetPageQuery variables=q##variables>
-        ...(
-             ({result}) =>
-               switch result {
-               | Loading => <div> (ReasonReact.string("Loading")) </div>
-               | Error(error) =>
-                 <div> (ReasonReact.string(error##message)) </div>
-               | Data(response) =>
-                 switch response##page {
-                 | None => <div> (ReasonReact.string("Nothing found")) </div>
-                 | Some(page) =>
-                   <div> (ReasonReact.string(page##content)) </div>
-                 }
-               }
-           )
-      </GetPageQuery>
+      <Page />
     </div>
 };
