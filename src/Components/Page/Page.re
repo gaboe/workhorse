@@ -10,15 +10,13 @@ module GetPage = [%graphql
 
 module GetPageQuery = ReasonApollo.CreateQuery(GetPage);
 
-let q = GetPage.make(~name="Test", ());
-
 let component = ReasonReact.statelessComponent("Page");
 
-let make = _children => {
+let make = (~name, _children) => {
   ...component,
   render: _self =>
     <div>
-      <GetPageQuery variables=q##variables>
+      <GetPageQuery variables=GetPage.make(~name, ())##variables>
         ...(
              ({result}) =>
                switch result {

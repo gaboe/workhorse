@@ -33,6 +33,5 @@ let make = _children => {
         />
       </div>
       <SaveButton />
-      <Page />
     </div>
 };
