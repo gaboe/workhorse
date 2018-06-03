@@ -74,13 +74,19 @@ let make = _children => {
       <AddPageMutation>
       ...(
            (mutation, {result}) =>
-          <SaveButton onBtnClick=(_ => {
-            let variables = AddPage.make(~name=self.state.url, ~content=self.state.content, ());
-            mutation(
-              ~variables=variables##variables,
-              (),
-            )
-            |> _ => ReasonReact.Router.push("/"++self.state.url);
+          <SaveButton 
+          isDisabled=(String.length(self.state.url) == 0 || String.length(self.state.content) == 0 )
+          onBtnClick=(_ => {
+            if(String.length(self.state.url) > 0 || String.length(self.state.content) > 0 )
+            {
+              let variables = AddPage.make(~name=self.state.url, ~content=self.state.content, ());
+              mutation(
+                ~variables=variables##variables,
+                (),
+              )
+              |> _ => ReasonReact.Router.push("/"++self.state.url);
+            }
+            
           }) />
            
          )

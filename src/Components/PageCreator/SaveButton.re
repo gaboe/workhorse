@@ -1,10 +1,11 @@
 let component = ReasonReact.statelessComponent("SaveButton");
 
-let make = (~onBtnClick, _children) => {
+let make = (~isDisabled: bool, ~onBtnClick, _children) => {
   ...component,
   render: _self =>
     <div>
       <button
+        disabled=(isDisabled)
         onClick=(_ => onBtnClick()) 
         style=(
           ReactDOMRe.Style.make(
