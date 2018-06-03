@@ -1,5 +1,16 @@
 [@bs.module] external logo : string = "./../../logo.svg";
 
+module AddPage = [%graphql
+  {|
+    mutation AddPage($name: String!,$content: String!){
+      addPage(name: $name,content:$content){
+        name,
+        content
+      }
+    }
+|}
+];
+
 type state = {
   url: string,
   content: string
@@ -10,6 +21,8 @@ type action =
   | ChangeContent(string);
 
 let component = ReasonReact.reducerComponent("Form");
+
+module AddPageMutation = ReasonApollo.CreateMutation(AddPage);
 
 let make = _children => {
   ...component,
@@ -58,6 +71,21 @@ let make = _children => {
           rows=15
         />
       </div>
-      <SaveButton onBtnClick=(_ => Js.log("click")) />
+      <AddPageMutation>
+      ...(
+           (mutation, {result}) =>
+          <SaveButton onBtnClick=(_ => {
+            let variables = AddPage.make(~name=self.state.url, ~content=self.state.content, ());
+            mutation(
+              ~variables=variables##variables,
+              (),
+            )
+            |> _ => 
+              ReasonReact.Router.push("/"++self.state.url)
+            ;
+          }) />
+           
+         )
+    </AddPageMutation>
     </div>
 };
