@@ -20,6 +20,7 @@ let reducer = (action, state) =>
 let mapUrlToRoute = (url: ReasonReact.Router.url) =>
   switch url.path {
   | [] => PageCreator
+  | ["workhorse"] => PageCreator
   | _ => Page
 };
 

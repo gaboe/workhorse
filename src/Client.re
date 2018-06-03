@@ -1,17 +1,17 @@
-/* open ApolloLinks; */
 open ApolloInMemoryCache;
+
+[@bs.val] external url : string = "process.env.REACT_APP_SERVER_URL";
 
 type dataObject = {
   .
   "__typename": string,
   "id": string
-} /* Create an InMemoryCache */;
+};
 
 let inMemoryCache =
-  createInMemoryCache(~dataIdFromObject=(obj: dataObject) => obj##id, ()) /* Create an HTTP Link */;
+  createInMemoryCache(~dataIdFromObject=(obj: dataObject) => obj##id, ());
 
-let httpLink =
-  ApolloLinks.createHttpLink(~uri="http://localhost:3000/graphql", ());
+let httpLink = ApolloLinks.createHttpLink(~uri=url, ());
 
 let instance =
   ReasonApollo.createApolloClient(~link=httpLink, ~cache=inMemoryCache, ());

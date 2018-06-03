@@ -1,7 +1,12 @@
 {
   "name": "reason-scripts",
   "sources": ["src", "src/Components/PageCreator", "src/Components/Page"],
-  "bs-dependencies": ["reason-react", "@glennsl/bs-jest", "reason-apollo"],
+  "bs-dependencies": [
+    "reason-react",
+    "@glennsl/bs-jest",
+    "reason-apollo",
+    "@ahrefs/bs-dotenv"
+  ],
   "reason": {
     "react-jsx": 2
   },
