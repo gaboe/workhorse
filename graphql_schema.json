@@ -107,13 +107,9 @@
               "isDeprecated": false,
               "name": "page",
               "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "PageType",
-                  "ofType": null
-                }
+                "kind": "OBJECT",
+                "name": "PageType",
+                "ofType": null
               }
             }
           ],

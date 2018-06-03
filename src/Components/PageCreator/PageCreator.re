@@ -10,7 +10,7 @@ module GetPage = [%graphql
 
 module GetPageQuery = ReasonApollo.CreateQuery(GetPage);
 
-let q = GetPage.make(~name="Test", ());
+let q = GetPage.make(~name="Teaast", ());
 
 let component = ReasonReact.statelessComponent("PageCreator");
 
@@ -43,9 +43,14 @@ let make = _children => {
              ({result}) =>
                switch result {
                | Loading => <div> (ReasonReact.string("Loading")) </div>
-               | Error(error) => <div> (ReasonReact.string("Error")) </div>
+               | Error(error) =>
+                 <div> (ReasonReact.string(error##message)) </div>
                | Data(response) =>
-                 <div> (ReasonReact.string(response##page##content)) </div>
+                 switch response##page {
+                 | None => <div> (ReasonReact.string("Nothing found")) </div>
+                 | Some(page) =>
+                   <div> (ReasonReact.string(page##content)) </div>
+                 }
                }
            )
       </GetPageQuery>
